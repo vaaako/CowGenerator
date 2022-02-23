@@ -1,6 +1,8 @@
-import os, random, time
+import os, random, time, pathlib
 from PIL import Image
-  
+
+directory = pathlib.Path(__file__).parent.resolve() # Get actual directory
+
 def getRarity():
     rand = random.randint(1, 100)
 
@@ -25,34 +27,34 @@ def main():
     # Background > Base > Skin > Acessory > Hat 
 
     # Background
-    folder = f"elements/background/{getRarity()}"
+    folder = f"{directory}/elements/background/{getRarity()}"
     img = Image.open(f"{folder}/{random.choice(os.listdir(folder))}") # Get random rarity and get random file from folder
 
     # Base
-    base = Image.open("bases/vacona.png")
+    base = Image.open(f"{directory}/bases/vacona.png")
     img.paste(base, (0, 0), base) # Paste on background
 
     # Skin
-    folder = f"elements/skin/{getRarity()}"
+    folder = f"{directory}/elements/skin/{getRarity()}"
     skin = Image.open(f"{folder}/{random.choice(os.listdir(folder))}")
 
     img = Image.alpha_composite(img, skin) 
     # img.paste(skin, (0, 0), skin) # Se fizer desse jeito fica bugado, já que é uma imagem translucida e não totalmente transparente
 
     # Accessory
-    folder = f"elements/accessory/{getRarity()}"
+    folder = f"{directory}/elements/accessory/{getRarity()}"
     accessory = Image.open(f"{folder}/{random.choice(os.listdir(folder))}")
 
-    img.paste(accessory, (0, 0), accessory)
-
+    img = Image.alpha_composite(img, accessory) # One of the accessories is translucent
+    
     # Hat
-    folder = f"elements/hat/{getRarity()}"
+    folder = f"{directory}/elements/hat/{getRarity()}"
     hat = Image.open(f"{folder}/{random.choice(os.listdir(folder))}")
 
     img.paste(hat, (0, 0), hat)
 
     # Save
-    img.save("generated/"+time.strftime("%Y-%m-%d")+"_"+str(time.time()).split(".")[0]+".png") # Date format and Timestamp
+    img.save(f"{directory}/generated/"+time.strftime("%Y-%m-%d")+"_"+str(time.time()).split(".")[0]+".png") # Date format and Timestamp
           
     # except IOError:
     #     pass              
