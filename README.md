@@ -1,5 +1,9 @@
 # Cow Generator
 
-Cada item é agrupado aletóriamente por programação usando o pacote `Pillow` com raridade individual, sendo elas: Normal, Raro e Lendário  
+Each item is randomly assembled using `Pillow`, with rarities: Normal, Rare and Legendary<br>
 
-Para testar instale o pacote `Pillow` (`pip install Pillow`) e em seguida rode o arquivo `main.py`, as imagens geradas vão para a pasta "generated"
+### Intallation
+- Install `Pillow` (`pip install Pillow`) 
+- Run the `main.py` file
+<br>
+Generated images go to the "generated" folder
